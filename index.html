@@ -3,17 +3,17 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Evaluador de Adherencia Terapéutica</title>
+  <title>Evaluación de Adherencia Terapéutica</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       padding: 2rem;
-      background: #f0f4f8;
+      background: #f4f8fb;
       max-width: 800px;
       margin: auto;
     }
     h1 {
-      color: #005b96;
+      color: #004b8d;
     }
     .pregunta {
       margin-bottom: 1.5rem;
@@ -25,7 +25,7 @@
     button {
       margin-top: 1rem;
       padding: 0.6rem 1.2rem;
-      background-color: #0077cc;
+      background-color: #007acc;
       color: white;
       border: none;
       border-radius: 5px;
@@ -42,41 +42,41 @@
 </head>
 <body>
 
-  <h1>Evaluador de Adherencia Terapéutica</h1>
+  <h1>Evaluación de Adherencia en Investigación Clínica</h1>
 
   <form id="formAdherencia">
     <div class="pregunta">
-      <strong>1. ¿Con qué frecuencia olvida tomar su medicación?</strong>
-      <label><input type="radio" name="p1" value="0" required> Nunca</label>
-      <label><input type="radio" name="p1" value="1"> A veces</label>
-      <label><input type="radio" name="p1" value="2"> Frecuentemente o siempre</label>
+      <strong>1. En los últimos días, ¿ha olvidado alguna dosis de su tratamiento?</strong>
+      <label><input type="radio" name="p1" value="0" required> No, siempre lo he tomado</label>
+      <label><input type="radio" name="p1" value="1"> Una vez o en ocasiones</label>
+      <label><input type="radio" name="p1" value="2"> Con frecuencia u olvido varias veces</label>
     </div>
 
     <div class="pregunta">
-      <strong>2. ¿Entiende claramente el propósito y beneficio de sus medicamentos?</strong>
-      <label><input type="radio" name="p2" value="0" required> Sí</label>
-      <label><input type="radio" name="p2" value="2"> No</label>
+      <strong>2. ¿Comprende claramente para qué sirve su tratamiento en este estudio?</strong>
+      <label><input type="radio" name="p2" value="0" required> Sí, estoy bien informado(a)</label>
+      <label><input type="radio" name="p2" value="2"> No del todo, tengo dudas</label>
     </div>
 
     <div class="pregunta">
-      <strong>3. ¿Ha recibido explicación por parte del médico o farmacéutico sobre su enfermedad?</strong>
-      <label><input type="radio" name="p3" value="0" required> Sí</label>
-      <label><input type="radio" name="p3" value="2"> No</label>
+      <strong>3. ¿Ha recibido una explicación detallada por parte del equipo médico o farmacéutico?</strong>
+      <label><input type="radio" name="p3" value="0" required> Sí, me han explicado adecuadamente</label>
+      <label><input type="radio" name="p3" value="2"> No, o fue muy general</label>
     </div>
 
     <div class="pregunta">
-      <strong>4. ¿Cuántas veces ha recogido todas las prescripciones en el último mes?</strong>
-      <label><input type="radio" name="p4" value="0" required> Todas</label>
-      <label><input type="radio" name="p4" value="1"> Faltantes</label>
+      <strong>4. ¿Ha retirado todos sus medicamentos en las fechas indicadas?</strong>
+      <label><input type="radio" name="p4" value="0" required> Sí, en todas las visitas</label>
+      <label><input type="radio" name="p4" value="1"> No, he tenido retrasos o ausencias</label>
     </div>
 
     <div class="pregunta">
-      <strong>5. ¿Tiene alguna preocupación o creencia negativa sobre su medicación?</strong>
-      <label><input type="radio" name="p5" value="0" required> No</label>
-      <label><input type="radio" name="p5" value="1"> Sí</label>
+      <strong>5. ¿Tiene alguna preocupación o dificultad con su medicación?</strong>
+      <label><input type="radio" name="p5" value="0" required> No, me siento seguro(a) y cómodo(a)</label>
+      <label><input type="radio" name="p5" value="1"> Sí, tengo dudas o inquietudes</label>
     </div>
 
-    <button type="submit">Calcular adherencia</button>
+    <button type="submit">Evaluar</button>
   </form>
 
   <div id="resultado"></div>
@@ -94,14 +94,20 @@
 
       let resultado = `<h2>Puntaje Total: ${puntaje}</h2>`;
       if (puntaje <= 2) {
-        resultado += `<p><strong>Nivel de Adherencia:</strong> Alta</p>`;
-        resultado += `<p>✔️ Felicitar al paciente y reforzar su compromiso. Revisiones cada 3–6 meses.</p>`;
+        resultado += `<p><strong>Adherencia alta:</strong> El paciente muestra un compromiso adecuado con el tratamiento.</p>`;
+        resultado += `<p><strong>Intervención farmacéutica:</strong> Reforzar positivamente su conducta, mantener seguimiento mensual y verificar tolerancia y comprensión continua.</p>`;
       } else if (puntaje <= 5) {
-        resultado += `<p><strong>Nivel de Adherencia:</strong> Moderada</p>`;
-        resultado += `<p>⚠️ Realizar entrevista para identificar barreras, usar recordatorios o pastilleros, reforzar educación.</p>`;
+        resultado += `<p><strong>Adherencia intermedia:</strong> El paciente presenta ciertas dificultades que podrían afectar el tratamiento.</p>`;
+        resultado += `<p><strong>Intervención farmacéutica:</strong> Realizar entrevista estructurada, explorar causas del olvido o dudas, reforzar la educación personalizada, y entregar herramientas como alarmas o pastilleros.</p>`;
       } else {
-        resultado += `<p><strong>Nivel de Adherencia:</strong> Baja</p>`;
-        resultado += `<p>❌ Requiere intervención farmacéutica intensiva: entrevista motivacional, educación individual, uso de herramientas de apoyo (apps, pastilleros), y seguimiento mensual.</p>`;
+        resultado += `<p><strong>Adherencia baja:</strong> El paciente presenta múltiples barreras para cumplir con el tratamiento.</p>`;
+        resultado += `<p><strong>Intervención farmacéutica:</strong> Aplicar atención farmacéutica intensiva incluyendo:</p>
+        <ul>
+          <li>Consulta educativa uno a uno para resolver dudas</li>
+          <li>Entrevista motivacional para comprender resistencias o miedos</li>
+          <li>Diseño de plan individual con refuerzo semanal y seguimiento clínico</li>
+          <li>Coordinación con el equipo médico si se requiere ajuste o simplificación del régimen</li>
+        </ul>`;
       }
 
       document.getElementById("resultado").innerHTML = resultado;
