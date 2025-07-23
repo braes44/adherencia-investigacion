@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Evaluador de Adherencia Terapéutica</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background: #f0f4f8;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      color: #005b96;
+    }
+    .pregunta {
+      margin-bottom: 1.5rem;
+    }
+    label {
+      display: block;
+      margin: 0.3rem 0;
+    }
+    button {
+      margin-top: 1rem;
+      padding: 0.6rem 1.2rem;
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    #resultado {
+      margin-top: 2rem;
+      background: #ffffff;
+      padding: 1.2rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Evaluador de Adherencia Terapéutica</h1>
+
+  <form id="formAdherencia">
+    <div class="pregunta">
+      <strong>1. ¿Con qué frecuencia olvida tomar su medicación?</strong>
+      <label><input type="radio" name="p1" value="0" required> Nunca</label>
+      <label><input type="radio" name="p1" value="1"> A veces</label>
+      <label><input type="radio" name="p1" value="2"> Frecuentemente o siempre</label>
+    </div>
+
+    <div class="pregunta">
+      <strong>2. ¿Entiende claramente el propósito y beneficio de sus medicamentos?</strong>
+      <label><input type="radio" name="p2" value="0" required> Sí</label>
+      <label><input type="radio" name="p2" value="2"> No</label>
+    </div>
+
+    <div class="pregunta">
+      <strong>3. ¿Ha recibido explicación por parte del médico o farmacéutico sobre su enfermedad?</strong>
+      <label><input type="radio" name="p3" value="0" required> Sí</label>
+      <label><input type="radio" name="p3" value="2"> No</label>
+    </div>
+
+    <div class="pregunta">
+      <strong>4. ¿Cuántas veces ha recogido todas las prescripciones en el último mes?</strong>
+      <label><input type="radio" name="p4" value="0" required> Todas</label>
+      <label><input type="radio" name="p4" value="1"> Faltantes</label>
+    </div>
+
+    <div class="pregunta">
+      <strong>5. ¿Tiene alguna preocupación o creencia negativa sobre su medicación?</strong>
+      <label><input type="radio" name="p5" value="0" required> No</label>
+      <label><input type="radio" name="p5" value="1"> Sí</label>
+    </div>
+
+    <button type="submit">Calcular adherencia</button>
+  </form>
+
+  <div id="resultado"></div>
+
+  <script>
+    document.getElementById("formAdherencia").addEventListener("submit", function(e) {
+      e.preventDefault();
+      let puntaje = 0;
+      for (let i = 1; i <= 5; i++) {
+        const respuesta = document.querySelector(`input[name="p${i}"]:checked`);
+        if (respuesta) {
+          puntaje += parseInt(respuesta.value);
+        }
+      }
+
+      let resultado = `<h2>Puntaje Total: ${puntaje}</h2>`;
+      if (puntaje <= 2) {
+        resultado += `<p><strong>Nivel de Adherencia:</strong> Alta</p>`;
+        resultado += `<p>✔️ Felicitar al paciente y reforzar su compromiso. Revisiones cada 3–6 meses.</p>`;
+      } else if (puntaje <= 5) {
+        resultado += `<p><strong>Nivel de Adherencia:</strong> Moderada</p>`;
+        resultado += `<p>⚠️ Realizar entrevista para identificar barreras, usar recordatorios o pastilleros, reforzar educación.</p>`;
+      } else {
+        resultado += `<p><strong>Nivel de Adherencia:</strong> Baja</p>`;
+        resultado += `<p>❌ Requiere intervención farmacéutica intensiva: entrevista motivacional, educación individual, uso de herramientas de apoyo (apps, pastilleros), y seguimiento mensual.</p>`;
+      }
+
+      document.getElementById("resultado").innerHTML = resultado;
+    });
+  </script>
+
+</body>
+</html>
